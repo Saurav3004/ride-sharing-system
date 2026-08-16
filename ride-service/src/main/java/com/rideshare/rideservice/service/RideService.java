@@ -65,6 +65,14 @@ public class RideService {
         return mapToResponse(savedRide);
     }
 
+    public void updateRideWithDriver(String rideId,String driverId){
+        Ride ride = rideRepository.findById(rideId).orElseThrow(() -> new RuntimeException("Ride not found"));
+
+        ride.setDriverId(driverId);
+        ride.setStatus(RideStatus.ACCEPTED);
+        rideRepository.save(ride);
+    }
+
     public RideResponse mapToResponse(Ride savedRide){
         RideResponse rideResponse = new RideResponse();
 
